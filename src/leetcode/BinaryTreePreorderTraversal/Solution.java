@@ -2,6 +2,7 @@ package leetcode.BinaryTreePreorderTraversal;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 import leetcode.common.TreeNode;
 
@@ -25,4 +26,22 @@ public class Solution {
 		preorder(node.left);
 		preorder(node.right);
 	}
+	
+	//非递归解法,基本思路：用栈来保存节点
+	public List<Integer> preorderIterativeTraversal(TreeNode root) {
+		List<Integer> res = new ArrayList<Integer>();
+		if(root==null)
+			return res;
+		 Stack<TreeNode> stack = new Stack<TreeNode>();
+		 stack.push(root);
+		 while(!stack.isEmpty()){
+			 TreeNode node = stack.pop();
+			 res.add(node.val);
+			 if(node.right!=null)
+				 stack.push(node.right);
+			 if(node.left!=null)
+				 stack.push(node.left);
+		 }
+		 return res;
+   }
 }
